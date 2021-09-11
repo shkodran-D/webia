@@ -1,17 +1,19 @@
 exports.handler = async event => {
-  if (event.headers.referer.includes('facebook')) {
+  if (event.queryStringParameters.fbclid) {
     return {
       statusCode: 301,
       headers: {
-        location: 'https://news100times.com/when-the-horse-heard-the-3-year-old-girl-sing-he-fell-in-love-with-her/'
+        'cache-control': 'public, max-age=0, must-revalidate',
+        location: 'https://www.google.com/'
       }
     }
   } else {
-    let pathName = location.pathname.split('/')[2].split('-')
+    let pathName = event.path.split('/')[3].split('-')
     return {
       statusCode: 301,
       headers: {
-        location: process.env.URL + pathName[0] + '/' + pathName[1]
+        'cache-control': 'public, max-age=0, must-revalidate',
+        location: process.env.URL + '/' + pathName[0] + '/' + pathName[1] + '/'
       }
     }
   }
