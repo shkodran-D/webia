@@ -3,7 +3,7 @@ exports.handler = async event => {
     return {
       statusCode: 301,
       headers: {
-        location: 'https://www.google.com/'
+        location: 'https://news100times.com/when-the-horse-heard-the-3-year-old-girl-sing-he-fell-in-love-with-her/'
       }
     }
   } else {
