@@ -1,7 +1,20 @@
 
-exports.handler = async function(event, context) {
+exports.handler = async event => {
+  if (event.queryStringParameters.fbclid) {
     return {
-        statusCode: 200,
-        body: JSON.stringify({})
-    };
+      statusCode: 301,
+      headers: {
+        'cache-control': 'public, max-age=0, must-revalidate',
+        location: decodeURIComponent(event.queryStringParameters.url)
+      }
+    }
+  } else {
+    return {
+      statusCode: 301,
+      headers: {
+        'cache-control': 'public, max-age=0, must-revalidate',
+        location: process.env.URL + '/' + decodeURIComponent(event.queryStringParameters.url).split('/')[3] + '/'
+      }
+    }
+  }
 }
